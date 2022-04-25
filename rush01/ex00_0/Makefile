@@ -1,0 +1,40 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/24 10:20:36 by yeongo            #+#    #+#              #
+#    Updated: 2022/04/24 10:26:58 by yeongo           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+
+NAME = rush-01
+
+SRCS = util.c			\
+	   init.c			\
+	   board.c			\
+	   valid_check.c	\
+	   main.c
+OBJS = $(SRCS:.c=.o)
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+.PHONY : all clean fclean re
+all : $(NAME)
+
+clean :
+	rm -rf $(OBJS)
+
+fclean : clean
+	rm -rf $(NAME)
+
+re : fclean all
