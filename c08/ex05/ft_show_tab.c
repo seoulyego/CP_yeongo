@@ -6,12 +6,11 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 21:26:43 by yeongo            #+#    #+#             */
-/*   Updated: 2022/04/22 22:20:38 by yeongo           ###   ########.fr       */
+/*   Updated: 2022/04/26 14:43:10 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
 
 #include "ft_stock_str.h"
 
@@ -22,19 +21,15 @@ void	ft_putchar(char c)
 
 void	ft_putstr(char *str)
 {
-	int	length;
-
-	length = 0;
-	while (str[length])
-		length++;
-	write(1, str, length);
+	while (*str)
+		write(1, str++, 1);
 }
 
 void	ft_putnbr(int nbr)
 {
 	if (nbr > 9)
 		ft_putnbr(nbr / 10);
-	ft_putchar(nbr % 10);
+	ft_putchar(nbr % 10 + 48);
 }
 
 void	ft_show_tab(struct s_stock_str *par)

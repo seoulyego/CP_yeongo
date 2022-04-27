@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 21:31:35 by yeongo            #+#    #+#             */
-/*   Updated: 2022/04/22 22:13:13 by yeongo           ###   ########.fr       */
+/*   Updated: 2022/04/27 09:02:13 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,20 @@ int	ft_strlen(char *str)
 
 char	*ft_strdup(char *src)
 {
-	char	*result;
-	int		src_len;
+	char	*dest;
 	int		index;
 
-	src_len = ft_strlen(src);
-	result =  malloc(sizeof(char) * (src_len + 1));
-	if (!result)
+	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!dest)
 		return (NULL);
 	index = 0;
-	while (index  < src_len)
+	while (src[index])
 	{
-		result[index] = src[index];
+		dest[index] = src[index];
 		index++;
 	}
-	result[index] = '\0';
-	return (result);
+	dest[index] = '\0';
+	return (dest);
 }
 
 struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
