@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 18:25:19 by yeongo            #+#    #+#             */
-/*   Updated: 2022/04/22 22:02:05 by yeongo           ###   ########.fr       */
+/*   Created: 2022/04/27 16:08:06 by yeongo            #+#    #+#             */
+/*   Updated: 2022/04/27 16:08:25 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	ft_issep(char c, char *sep)
+int	ft_issep(char c, char *charset)
 {
 	int	index;
 
 	index = 0;
-	while (sep[index])
+	while (charset[index])
 	{
-		if (c == sep[index])
+		if (c == charset[index])
 			return (1);
 		index++;
 	}
@@ -30,66 +30,66 @@ int	ft_issep(char c, char *sep)
 
 int	ft_res_size(char *str, char *charset)
 {
-	int	count;
 	int	index;
+	int	count;
 
-	count = 0;
 	index = 1;
+	count = 0;
 	while (str[index - 1] && str[index])
 	{
 		if (!ft_issep(str[index - 1], charset) && ft_issep(str[index], charset))
-			count++;;
+			count++;
 		index++;
 	}
-	if (ft_issep(str[index], charset))
+	if (str[index - 1] && !ft_issep(str[index - 1], charset))
 		count++;
 	return (count);
 }
 
-int	ft_res_alloc(char **result, char *str, char *sep, int m_size)
+int	ft_res_alloc(char **result, int size, char *str, char *charset)
 {
-	int	length;
-	int	index;
 	int	x;
+	int	index;
+	int	length;
 
 	x = 0;
-	while (x < m_size)
+	index = 0;
+	while (str[index] && x < size)
 	{
 		length = 0;
-		index = 0;
-		while (str[index] && ft_issep(str[index], sep))
+		while (str[index] && ft_issep(str[index], charset))
 			index++;
-		while (str[index] && !ft_issep(str[index], sep))
+		while (str[index] && !ft_issep(str[index], charset))
 		{
-			length++;
 			index++;
+			length++;
 		}
 		result[x] = malloc(sizeof(char) * (length + 1));
-		if (!result[x])
+		if (result[x] == NULL)
 			return (0);
 		x++;
 	}
 	return (1);
 }
 
-void	ft_rescpy(char **result, char *str, char *sep, int m_size)
+void	ft_res_copy(char **result, int size, char *str, char *charset)
 {
-	int	index;
 	int	x;
 	int	y;
+	int	index;
 
 	index = 0;
 	x = 0;
-	while (x < m_size)
+	while (str[index] && x < size)
 	{
 		y = 0;
-		while (str[index] && ft_issep(str[index], sep))
+		while (str[index] && ft_issep(str[index], charset))
 			index++;
-		while (str[index] && !ft_issep(str[index], sep))
+		while (str[index] && !ft_issep(str[index], charset))
 		{
 			result[x][y] = str[index];
-			index++;
 			y++;
+			index++;
 		}
 		result[x][y] = '\0';
 		x++;
@@ -103,11 +103,11 @@ char	**ft_split(char *str, char *charset)
 	char	**result;
 
 	m_size = ft_res_size(str, charset);
-	result = malloc(sizeof(char *) * (m_size + 1));
-	if (!result)
+	result = (char **)malloc(sizeof(char *) * (m_size + 1));
+	if (result == NULL)
 		return (NULL);
-	if (!ft_res_alloc(result, str, charset, m_size))
+	if (!ft_res_alloc(result, m_size, str, charset))
 		return (NULL);
-	ft_rescpy(result, str, charset, m_size);
+	ft_res_copy(result, m_size, str, charset);
 	return (result);
 }

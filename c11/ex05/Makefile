@@ -5,36 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/23 09:23:48 by yeongo            #+#    #+#              #
-#    Updated: 2022/04/27 18:26:33 by yeongo           ###   ########.fr        #
+#    Created: 2022/04/27 22:07:44 by yeongo            #+#    #+#              #
+#    Updated: 2022/04/28 02:41:06 by yeongo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -c
+CFLAGS = -Wall -Wextra -Werror
 
-AR = ar
-ARFLAGS = rcus
+NAME = do-op
 
-NAME = libft.a
-
-SRC_DIR = srcs
-INC_DIR = includes
-
-SRCS = $(SRC_DIR)/ft_putchar.c	\
-	   $(SRC_DIR)/ft_swap.c		\
-	   $(SRC_DIR)/ft_putstr.c	\
-	   $(SRC_DIR)/ft_strlen.c	\
-	   $(SRC_DIR)/ft_strcmp.c
+SRCS = calc.c	\
+	   do_op.c	\
+	   print.c	\
+	   utils.c	\
+	   main.c
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -o $@ $< -I $(INC_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME) : $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re
 
 all : $(NAME)
 
