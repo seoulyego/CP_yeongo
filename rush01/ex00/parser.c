@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 17:46:03 by yeongo            #+#    #+#             */
-/*   Updated: 2022/04/24 19:04:58 by yeongo           ###   ########.fr       */
+/*   Updated: 2022/05/26 15:28:50 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_view_length(char *line)
 		else
 			return (-1);
 	}
-	if (length == 0 || length % 4 != 0 || length < 16 || length > 36)
+	if (length == 0 || length % 4 != 0 || length > 36)
 		return (-1);
 	return (length);
 }
