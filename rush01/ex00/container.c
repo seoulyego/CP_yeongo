@@ -6,7 +6,7 @@
 /*   By: yeongo <yeongo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 17:45:57 by yeongo            #+#    #+#             */
-/*   Updated: 2022/04/24 19:05:39 by yeongo           ###   ########.fr       */
+/*   Updated: 2022/05/26 15:19:42 by yeongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	fill_skyscrapper(t_skyscraper *sc, char *line)
 	int	view_length;
 
 	view_length = get_view_length(line);
-	
 	if (view_length == -1)
 		return (1);
 	sc->width = view_length / 4;
